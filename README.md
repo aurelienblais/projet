@@ -1,1 +1,3 @@
 # projet
+
+Auteur : Aurélien Blais
