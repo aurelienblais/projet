@@ -1,0 +1,15 @@
+version: '2.1'
+services:
+  postgres:
+    image: postgres:9.6.3
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 10s
+      retries: 12
+    volumes:
+      - /data/perso/projet/postgres/data:/var/lib/postgresql/data/pgdata
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
