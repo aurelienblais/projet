@@ -1,0 +1,22 @@
+.row
+  .col-sm-8
+    %h1 Students
+  .col-sm-4.text-right
+    = link_to 'New student', new_student_path, class: 'btn btn-info'
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Name
+      %td Last name
+      %td Birthdate
+      %td
+  %tbody
+    - @students.each do |student|
+      %tr
+        %td= student.name
+        %td= student.lastname
+        %td= student.birthdate
+        %td
+          = link_to 'Edit', edit_student_path(student), class: 'btn btn-info'
+          = button_to 'Destroy', student_path(student), method: :delete, class: 'btn btn-danger'

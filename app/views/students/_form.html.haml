@@ -1,0 +1,16 @@
+.row
+  .col-sm-3
+  .col-sm-6
+    = form_for @student do |f|
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :lastname
+        = f.text_field :lastname, class: 'form-control'
+
+      .form-group
+        = f.label :birthdate
+        = f.date_select :birthdate, class: 'form-control'
+
+      = f.submit 'Submit', class: 'btn btn-success'

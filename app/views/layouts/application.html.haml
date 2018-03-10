@@ -7,4 +7,17 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+    - if notice
+      .container
+        .alert.alert-success
+          = notice
+          = button_tag class: 'close', 'data-dismiss': 'alert', 'aria-label': 'close' do
+            %span{'aria-hidden': true} &times;
+    - if alert
+      .container
+        .alert.alert-danger
+          = alert
+          = button_tag class: 'close', 'data-dismiss': 'alert', 'aria-label': 'close' do
+            %span{'aria-hidden': true} &times;
+
     = yield
