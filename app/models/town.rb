@@ -1,5 +1,7 @@
 class Town < ActiveRecord::Base
   before_save :get_geocoding
+  validates_presence_of :name
+
 
   private
 

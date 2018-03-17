@@ -27,4 +27,9 @@ group :development do
   gem 'byebug'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
+
 ruby '2.2.2'
