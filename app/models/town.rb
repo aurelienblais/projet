@@ -4,8 +4,10 @@ class Town < ActiveRecord::Base
   private
 
   def get_geocoding
-    town           = Nominatim.search.city(name).country('France').limit(1).address_details(true).first
-    self.zipcode   = town.address&.postcode
+    town = Nominatim.search.city(name).country('France').limit(1).address_details(true).first
+    return if town.nil?
+
+    self.zipcode   = town.address.postcode
     self.latitude  = town.latitude
     self.longitude = town.longitude
   end
