@@ -28,8 +28,15 @@ RSpec.describe StudentsController, type: :controller do
     context "with valid params" do
       it "creates a new Student" do
         expect {
-          post :create, { :student => FactoryBot.build(:student).attributes }
+          post :create, { student: FactoryBot.build(:student).attributes }
         }.to change(Student, :count).by(1)
+      end
+    end
+
+    context "with invalid params" do
+      it "render form" do
+        post :create, { student: FactoryBot.build(:student).attributes.except('lastname') }
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -42,6 +49,15 @@ RSpec.describe StudentsController, type: :controller do
         student.reload
       end
     end
+
+    context "with invalid params" do
+      it "render form" do
+        student = FactoryBot.create(:student)
+        student.lastname = nil
+        put :update, { :id => student.to_param, :student => student.attributes }
+        expect(response).to render_template(:edit)
+      end
+    end
   end
 
   describe "DELETE #destroy" do
@@ -50,6 +66,12 @@ RSpec.describe StudentsController, type: :controller do
       expect {
         delete :destroy, { :id => student.to_param }
       }.to change(Student, :count).by(-1)
+    end
+
+    it "can't delete student" do
+      expect{
+        delete :destroy, { :id => 0 }
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "redirects to the students list" do

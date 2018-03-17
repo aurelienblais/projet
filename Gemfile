@@ -32,6 +32,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'simplecov'
   gem 'simplecov-console'
+  gem 'byebug'
 end
 
 ruby '2.2.2'

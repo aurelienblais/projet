@@ -34,9 +34,9 @@ class TownsController < ApplicationController
   def update
     if @town.update(town_params)
       redirect_to towns_path, notice: 'Town was successfully updated.'
-    else
-      render :edit
     end
+  rescue
+    render :edit
   end
 
   # DELETE /towns/1

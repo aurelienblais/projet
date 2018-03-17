@@ -40,6 +40,14 @@ RSpec.describe TownsController, type: :controller do
         }.to change(Town, :count).by(1)
       end
     end
+
+    context "with invalid params" do
+      it "render form" do
+        post :create, { town: FactoryBot.build(:town).attributes.except('name') }
+        expect(response).to render_template(:new)
+      end
+    end
+
   end
 
   describe "PUT #update" do
@@ -48,6 +56,15 @@ RSpec.describe TownsController, type: :controller do
         town = FactoryBot.create(:town)
         put :update, { id: town.to_param, town: town.attributes }
         town.reload
+      end
+    end
+
+    context "with invalid params" do
+      it "render form" do
+        town = FactoryBot.create(:town)
+        town.name = 'Town that does not exist'
+        put :update, { id: town.to_param, town: town.attributes }
+        expect(response).to render_template(:edit)
       end
     end
   end

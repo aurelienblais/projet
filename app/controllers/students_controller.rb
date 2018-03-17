@@ -22,7 +22,8 @@ class StudentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit;
+  end
 
   def update
     if @student.update_attributes(student_params)
@@ -35,13 +36,9 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    if @student.destroy
-      flash[:notice] = 'Student destroyed'
-      redirect_to students_path
-    else
-      flash[:alert] = 'A problem occured'
-      redirect_to students_path
-    end
+    @student.destroy
+    flash[:notice] = 'Student destroyed'
+    redirect_to students_path
   end
 
   private
