@@ -4,7 +4,6 @@ class Town < ActiveRecord::Base
 
   def forecast
     forecast ||= ForecastIO.forecast(latitude, longitude, params: { units: 'si', lang: 'fr' }).currently
-
   end
 
   private

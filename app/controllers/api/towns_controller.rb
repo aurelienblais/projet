@@ -1,6 +1,6 @@
 class Api::TownsController < Api::ApiController
   def index
-    render json: Town.all
+    render json: Town.all, each_serializer: TownSummarySerializer
   end
 
   def show
