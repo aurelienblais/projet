@@ -3,6 +3,7 @@
 Auteur : Aurélien Blais
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/42b6b542ffa5e9c03df9/maintainability)](https://codeclimate.com/github/aurelienblais/projet/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/42b6b542ffa5e9c03df9/test_coverage)](https://codeclimate.com/github/aurelienblais/projet/test_coverage)
 [![Build Status](https://travis-ci.org/aurelienblais/projet.svg?branch=master)](https://travis-ci.org/aurelienblais/projet)
 ## Dependencies
 
