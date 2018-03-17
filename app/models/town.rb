@@ -2,6 +2,10 @@ class Town < ActiveRecord::Base
   before_save :get_geocoding
   validates_presence_of :name
 
+  def forecast
+    forecast ||= HTTParty.get("https://api.darksky.net/forecast/#{ENV['DARKSKY_API']}/#{latitude},#{longitude}?lang=fr&units=si").parsed_response['currently']
+  end
+
   private
 
   def get_geocoding

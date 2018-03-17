@@ -14,6 +14,7 @@ gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails'
 
 gem 'nominatim'
+gem 'httparty'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -32,6 +33,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'simplecov-console'
+  gem 'dotenv-rails'
 end
 
 ruby '2.2.2'

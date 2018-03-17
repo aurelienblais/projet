@@ -13,6 +13,18 @@
   %b Longitude:
   = @town.longitude
 
+%p
+  %b Météo :
+  = @town.forecast['summary']
+  %br
+  %b Température :
+  = "#{@town.forecast['temperature']}°C"
+  %br
+  %b Humidité :
+  = "#{@town.forecast['humidity'].to_f * 100} %"
+
+= @town.forecast
+
 = link_to 'Edit', edit_town_path(@town)
 \|
 = link_to 'Back', towns_path

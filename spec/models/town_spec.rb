@@ -18,4 +18,16 @@ RSpec.describe Town, type: :model do
       expect { unknown.save }.to raise_error(ArgumentError)
     end
   end
+
+  describe 'Forecast' do
+    # Can't know data without mock or vcr
+    it 'return JSON' do
+      belfort      = Town.new
+      belfort.name = 'belfort'
+      belfort.save
+
+      parse_json = JSON(belfort.forecast)
+      expect(parse_json['summary']).to_not eq(nil)
+    end
+  end
 end

@@ -15,3 +15,5 @@
 .idea/inspectionProfiles/
 .idea/workspace.xml
 /coverage
+
+.env
