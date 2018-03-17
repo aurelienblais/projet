@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @town.name
+%p
+  %b Zipcode:
+  = @town.zipcode
+%p
+  %b Latitude:
+  = @town.latitude
+%p
+  %b Longitude:
+  = @town.longitude
+
+= link_to 'Edit', edit_town_path(@town)
+\|
+= link_to 'Back', towns_path

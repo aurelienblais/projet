@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'students#index'
-
+  resources :towns
   resources :students
+
+  root 'home#index'
 end

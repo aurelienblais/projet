@@ -13,12 +13,18 @@ gem 'haml-rails', '~> 1.0'
 
 gem 'jquery-rails'
 
+gem 'nominatim'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
 group :production do
   gem 'rails_12factor'
+end
+
+group :development do
+  gem 'byebug'
 end
 
 ruby '2.2.2'
