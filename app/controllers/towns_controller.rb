@@ -1,5 +1,5 @@
 class TownsController < ApplicationController
-  before_action :set_town, only: [:show, :edit, :update, :destroy]
+  before_action :set_town, only: %i[show edit update destroy]
 
   # GET /towns
   def index
@@ -7,8 +7,7 @@ class TownsController < ApplicationController
   end
 
   # GET /towns/1
-  def show
-  end
+  def show; end
 
   # GET /towns/new
   def new
@@ -16,8 +15,7 @@ class TownsController < ApplicationController
   end
 
   # GET /towns/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /towns
   def create
@@ -35,7 +33,7 @@ class TownsController < ApplicationController
     if @town.update(town_params)
       redirect_to towns_path, notice: 'Town was successfully updated.'
     end
-  rescue
+  rescue StandardError
     render :edit
   end
 
@@ -46,13 +44,14 @@ class TownsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_town
-      @town = Town.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def town_params
-      params.require(:town).permit(:name, :zipcode)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_town
+    @town = Town.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def town_params
+    params.require(:town).permit(:name, :zipcode)
+  end
 end

@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.10'
 gem 'pg', '~> 0.20'
-gem 'sprockets-rails', '~> 2.3.2'
 gem 'puma'
+gem 'rails', '4.2.10'
+gem 'sprockets-rails', '~> 2.3.2'
 
-gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
 
 gem 'bootstrap', '~> 4.0.0'
 gem 'haml-rails', '~> 1.0'
@@ -28,11 +28,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'simplecov'
   gem 'simplecov-console'
-  gem 'byebug'
 end
 
 ruby '2.2.2'

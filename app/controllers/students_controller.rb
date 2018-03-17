@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
-
-  before_action :set_student, only: [:destroy, :edit, :update]
+  before_action :set_student, only: %i[destroy edit update]
 
   def index
     @students = Student.all
@@ -22,8 +21,7 @@ class StudentsController < ApplicationController
     end
   end
 
-  def edit;
-  end
+  def edit; end
 
   def update
     if @student.update_attributes(student_params)
