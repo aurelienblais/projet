@@ -3,7 +3,8 @@ class Town < ActiveRecord::Base
   validates_presence_of :name
 
   def forecast
-    forecast ||= HTTParty.get("https://api.darksky.net/forecast/#{ENV['DARKSKY_API']}/#{latitude},#{longitude}?lang=fr&units=si").parsed_response['currently']
+    forecast ||= ForecastIO.forecast(latitude, longitude, params: { units: 'si', lang: 'fr' }).currently
+
   end
 
   private

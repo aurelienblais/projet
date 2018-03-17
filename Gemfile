@@ -14,7 +14,8 @@ gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails'
 
 gem 'nominatim'
-gem 'httparty'
+gem 'forecast_io'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
