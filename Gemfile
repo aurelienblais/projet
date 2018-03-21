@@ -37,4 +37,7 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
+# Security fix
+gem 'loofah', '~> 2.2.1'
+
 ruby '2.2.2'
