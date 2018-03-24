@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'pg', '~> 0.20'
 gem 'puma'
-gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '4.2.10'
 gem 'sprockets-rails', '~> 2.3.2'
 
