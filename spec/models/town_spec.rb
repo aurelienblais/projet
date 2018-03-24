@@ -16,6 +16,7 @@ RSpec.describe Town, type: :model do
       unknown.name = 'Town that does not exist'
 
       expect { unknown.save }.to raise_error(ArgumentError)
+      expect(unknown.forecast).to eq(nil)
     end
   end
 

@@ -15,13 +15,13 @@
 
 %p
   %b Météo :
-  = @town.forecast['summary']
+  = @town.forecast.try(:[], 'summary')
   %br
   %b Température :
-  = "#{@town.forecast['temperature']}°C"
+  = "#{@town.forecast.try(:[], 'temperature')}°C"
   %br
   %b Humidité :
-  = "#{@town.forecast['humidity'].to_f * 100} %"
+  = "#{@town.forecast.try(:[], 'humidity').to_f * 100} %"
 
 = link_to 'Edit', edit_town_path(@town)
 \|
