@@ -8,7 +8,7 @@ Auteur : Aurélien Blais
 ## Dependencies
 
 * Ruby 2.2.2
-* Postgres 9.6.3
+* Postgres 9.6.6
 
 ## Setup
 
@@ -23,3 +23,10 @@ Make sure the mount point is set in the `docker-compose.yml` file (and added as 
 _Warning:_ Port is forwarded to 5433 in order to avoid conflict with running Postgres
 
 To use it, run `docker-compose up -d` or `docker-compose up`
+
+## Api Endpoints
+
+* GET `api/towns`
+* GET `api/towns/:id`
+* POST `api/towns/`
+* PATCH `api/towns/:id`
