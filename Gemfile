@@ -13,9 +13,9 @@ gem 'haml-rails', '~> 1.0'
 
 gem 'jquery-rails'
 
-gem 'nominatim'
-gem 'forecast_io'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'forecast_io'
+gem 'nominatim'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -30,11 +30,11 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'simplecov-console'
-  gem 'dotenv-rails'
 end
 
 # Security fix
