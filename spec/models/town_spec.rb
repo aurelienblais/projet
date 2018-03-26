@@ -32,50 +32,56 @@ RSpec.describe Town, type: :model do
     end
   end
 
-  describe 'Redis up' do
-    it 'set cache' do
-      belfort      = Town.new
-      belfort.name = 'belfort'
-      belfort.save
-
-      belfort_key = belfort.send(:key)
-
-      redis = RedisService.new
-
-      expect(redis.exists(belfort_key)).to eq(false)
-      expect(redis.get(belfort_key)).to eq(nil)
-
-      belfort.forecast
-
-      expect(redis.exists(belfort_key)).to eq(true)
-      expect(redis.get(belfort_key)).to_not eq(nil)
-
+  describe 'Redis' do
+    before :each do
+      REDIS_POOL.with do |connection|
+        connection.keys.each { |k| connection.del k }
+      end
     end
-  end
 
-  describe 'Redis down' do
-    it 'fail' do
-      cached_redis_url = ENV["REDIS_URL"]
-      ENV["REDIS_URL"] = "redis://localhost:22222/0"
+    describe 'Redis up' do
+      it 'set cache' do
+        belfort      = Town.new
+        belfort.name = 'belfort'
+        belfort.save
 
-      belfort      = Town.new
-      belfort.name = 'belfort'
-      belfort.save
+        belfort_key = belfort.send(:key)
 
-      belfort_key = belfort.send(:key)
+        redis = RedisService.new
 
-      redis = RedisService.new
+        expect(redis.exists(belfort_key)).to eq(false)
+        expect(redis.get(belfort_key)).to eq(nil)
 
-      expect(redis.exists(belfort_key)).to eq(false)
-      expect(redis.get(belfort_key)).to eq(false)
+        belfort.forecast
 
-      belfort.forecast
+        expect(redis.exists(belfort_key)).to eq(true)
+        expect(redis.get(belfort_key)).to_not eq(nil)
+      end
+    end
 
-      expect(redis.exists(belfort_key)).to eq(false)
-      expect(redis.get(belfort_key)).to eq(false)
+    describe 'Redis down' do
+      it 'fail' do
+        cached_redis_pool = REDIS_POOL
+        REDIS_POOL = ConnectionPool.new(size: 10, timeout: 5) { Redis.new(url: 'redis://localhost:22222/0') }
 
-      ENV['REDIS_URL'] = cached_redis_url
+        belfort      = Town.new
+        belfort.name = 'belfort'
+        belfort.save
 
+        belfort_key = belfort.send(:key)
+
+        redis = RedisService.new
+
+        expect(redis.exists(belfort_key)).to eq(false)
+        expect(redis.get(belfort_key)).to eq(nil)
+
+        belfort.forecast
+
+        expect(redis.exists(belfort_key)).to eq(false)
+        expect(redis.get(belfort_key)).to eq(nil)
+
+        REDIS_POOL = cached_redis_pool
+      end
     end
   end
 end

@@ -4,6 +4,8 @@ gem 'pg', '~> 0.20'
 gem 'puma'
 gem 'rails', '4.2.10'
 gem 'sprockets-rails', '~> 2.3.2'
+
+gem 'connection_pool', '~> 2.2', '>= 2.2.1'
 gem 'redis'
 
 gem 'coffee-rails', '~> 4.0.0'

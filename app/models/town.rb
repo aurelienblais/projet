@@ -5,7 +5,6 @@ class Town < ActiveRecord::Base
 
   def forecast
     redis = RedisService.new
-
     return forecast ||= JSON.parse(redis.get(key)) if redis.exists(key)
     forecast ||= JSON.parse(redis.set(key, ForecastIO.forecast(latitude, longitude, params: { units: 'si', lang: 'fr' }).currently.to_json))
   rescue StandardError

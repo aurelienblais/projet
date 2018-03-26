@@ -1,26 +1,27 @@
 class RedisService
-
-  def connection
-    connection ||= Redis.new(url: ENV['REDIS_URL'])
-  end
-
   def exists(key)
-    connection.exists(key)
+    REDIS_POOL.with do |connection|
+      connection.exists(key)
+    end
   rescue Redis::CannotConnectError
     false
   end
 
   def get(key)
-    connection.get(key)
-  rescue
-    false
+    REDIS_POOL.with do |connection|
+      connection.get(key)
+    end
+  rescue Redis::CannotConnectError
+    nil
   end
 
   def set(key, value)
-    connection.set(key, value)
-    connection.expire(key, 300) # Cache value for 5 minutes
-    value
-  rescue
+    REDIS_POOL.with do |connection|
+      connection.set(key, value)
+      connection.expire(key, 300) # Cache value for 5 minutes
+      value
+    end
+  rescue Redis::CannotConnectError
     value
   end
 end
