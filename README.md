@@ -9,6 +9,7 @@ Auteur : Aurélien Blais
 
 * Ruby 2.2.2
 * Postgres 9.6.6
+* Redis (Used to cache Forecast API response)
 
 ## Setup
 
@@ -30,3 +31,8 @@ To use it, run `docker-compose up -d` or `docker-compose up`
 * GET `api/towns/:id`
 * POST `api/towns/`
 * PATCH `api/towns/:id`
+
+## Redis
+
+The project can run without Redis,
+BUT as some people may play with the API, and explode Darksky API quota, it's preferable. 

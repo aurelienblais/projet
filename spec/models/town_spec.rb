@@ -27,8 +27,55 @@ RSpec.describe Town, type: :model do
       belfort.name = 'belfort'
       belfort.save
 
-      parse_json = JSON(belfort.forecast)
+      parse_json = belfort.forecast
       expect(parse_json['summary']).to_not eq(nil)
+    end
+  end
+
+  describe 'Redis up' do
+    it 'set cache' do
+      belfort      = Town.new
+      belfort.name = 'belfort'
+      belfort.save
+
+      belfort_key = belfort.send(:key)
+
+      redis = RedisService.new
+
+      expect(redis.exists(belfort_key)).to eq(false)
+      expect(redis.get(belfort_key)).to eq(nil)
+
+      belfort.forecast
+
+      expect(redis.exists(belfort_key)).to eq(true)
+      expect(redis.get(belfort_key)).to_not eq(nil)
+
+    end
+  end
+
+  describe 'Redis down' do
+    it 'fail' do
+      cached_redis_url = ENV["REDIS_URL"]
+      ENV["REDIS_URL"] = "redis://localhost:22222/0"
+
+      belfort      = Town.new
+      belfort.name = 'belfort'
+      belfort.save
+
+      belfort_key = belfort.send(:key)
+
+      redis = RedisService.new
+
+      expect(redis.exists(belfort_key)).to eq(false)
+      expect(redis.get(belfort_key)).to eq(false)
+
+      belfort.forecast
+
+      expect(redis.exists(belfort_key)).to eq(false)
+      expect(redis.get(belfort_key)).to eq(false)
+
+      ENV['REDIS_URL'] = cached_redis_url
+
     end
   end
 end
