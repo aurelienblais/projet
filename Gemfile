@@ -38,6 +38,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'simplecov-console'
+  gem 'database_cleaner'
 end
 
 # Security fix
