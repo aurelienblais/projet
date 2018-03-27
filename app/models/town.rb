@@ -1,5 +1,5 @@
 class Town < ActiveRecord::Base
-  MAX_RECORD = ENV.fetch('MAX_TOWN_RECORD', 20)
+  MAX_RECORD = ENV.fetch('MAX_TOWN_RECORD', 20).to_i
 
   before_save :get_geocoding
   before_save :max_rows?
