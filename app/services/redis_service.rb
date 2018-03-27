@@ -18,7 +18,7 @@ class RedisService
   def set(key, value)
     REDIS_POOL.with do |connection|
       connection.set(key, value)
-      connection.expire(key, 300) # Cache value for 5 minutes
+      connection.expire(key, ENV.fetch('REDIS_TTL', 300).to_i)
       value
     end
   rescue Redis::CannotConnectError
