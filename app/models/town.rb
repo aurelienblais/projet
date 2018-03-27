@@ -1,5 +1,8 @@
 class Town < ActiveRecord::Base
+  MAX_RECORD = ENV.fetch('MAX_TOWN_RECORD', 20)
+
   before_save :get_geocoding
+  before_save :max_rows?
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -25,5 +28,15 @@ class Town < ActiveRecord::Base
     self.zipcode   = town.address.postcode
     self.latitude  = town.latitude
     self.longitude = town.longitude
+  end
+
+  # Nasty method used to avoid mass town creation
+  def max_rows?
+    if Town.all.count > MAX_RECORD
+      errors.add(:error, "Too many records (max: #{MAX_RECORD})")
+      false
+    else
+      true
+    end
   end
 end
